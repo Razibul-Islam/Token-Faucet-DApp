@@ -1,4 +1,4 @@
-// SPDX-Lisence-Identifier: MIT
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
 import {ERC20} from "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
@@ -8,7 +8,7 @@ contract Token is ERC20 {
         _mint(msg.sender, 1e6 * 10 ** decimals());
     }
 
-    function balanceOf() public view returns (uint256) {
+    function balanceOfSender() public view returns (uint256) {
         return super.balanceOf(msg.sender);
     }
 
@@ -17,7 +17,7 @@ contract Token is ERC20 {
     }
 
     function transferTo(address to, uint256 amount) public {
-        require(balanceOf() >= amount, "Insufficient balance");
+        require(balanceOfSender() >= amount, "Insufficient balance");
         transfer(to, amount);
     }
 }
